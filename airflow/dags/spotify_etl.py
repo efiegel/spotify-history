@@ -53,17 +53,6 @@ def run_spotify_etl():
                            password=os.environ['DB_PASS'], host=os.environ['DB_HOST'])
     cursor = conn.cursor()
 
-    # sql_query = """
-    # CREATE TABLE IF NOT EXISTS my_played_tracks(
-    #     song_name VARCHAR(200),
-    #     artist_name VARCHAR(200),
-    #     played_at VARCHAR(200),
-    #     timestamp VARCHAR(200)
-    # )
-    # """
-    # cursor.execute(sql_query)
-    # conn.commit()
-
     try:
         song_df.to_sql("my_played_tracks", engine, schema='public', index=False, if_exists='replace')
         conn.commit()

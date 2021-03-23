@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, DateTime
-from postgres import Base
+from app import db
 
-class MyPlayedTracks(Base):
-    __tablename__ = 'my_played_tracks'
+class TrackHistory(db.Model):
+    __tablename__ = 'track_history'
 
     song_name = Column(String(200))
     artist_name = Column(String(200))
