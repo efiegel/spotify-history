@@ -11,8 +11,8 @@ db = SQLAlchemy(app)
 from models import *
 
 @app.route("/")
-def hello():
-    return "Hello World!"
+def home():
+    return "spotify history app"
 
 if __name__ == '__main__':
     app.run()
