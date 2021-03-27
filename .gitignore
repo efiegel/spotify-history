@@ -1,5 +1,4 @@
 /env
-/airflow/logs
-/airflow/airflow.db
+/airflow
 **/__pycache__
 .cache

@@ -6,11 +6,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import json
 
-
-def check_if_valid_data(df: pd.DataFrame) -> bool:
-    return True
-
-
 def run_spotify_etl():
     # get 50 latest tracks from the user
     scope = 'user-read-recently-played'
@@ -62,10 +57,6 @@ def run_spotify_etl():
         "played_at"
         ])
     song_df["played_at"]= pd.to_datetime(song_df["played_at"])
-
-    # Validate data
-    if check_if_valid_data(song_df):
-        pass
 
     # Load to postgres
     engine = sqlalchemy.create_engine('postgresql+psycopg2://' + os.environ['DB_CONNECTION'])
