@@ -10,7 +10,7 @@ default_args = {
     'owner': 'fiegel',
     'start_date': days_ago(1),
     'depends_on_past': True,
-    'email': [os.environ['DAG_EMAIL']],
+    # 'email': [os.environ['DAG_EMAIL']],
     'email_on_failure': True,
     'email_on_retry': False,
     'retries': 1,
