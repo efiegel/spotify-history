@@ -1,1 +1,1 @@
-web: airflow db init
+web: airflow initdb
