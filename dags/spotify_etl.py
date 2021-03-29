@@ -60,7 +60,7 @@ def run_spotify_etl():
 
     # Load to postgres
     engine = sqlalchemy.create_engine('postgresql+psycopg2://' + os.environ['DB_CONNECTION'])
-    conn = psycopg2.connect(database="postgres", user=os.environ['DB_USER'],
+    conn = psycopg2.connect(database=os.environ['DB_NAME'], user=os.environ['DB_USER'],
                            password=os.environ['DB_PASS'], host=os.environ['DB_HOST'])
     cursor = conn.cursor()
 
