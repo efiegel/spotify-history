@@ -71,6 +71,3 @@ def run_spotify_etl():
         print(e)
     conn.close()
     print("successfully wrote to database")
-
-if __name__ == "__main__":
-    run_spotify_etl()
