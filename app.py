@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-from .dags.spotify_etl import run_spotify_etl
+from dags.spotify_etl import run_spotify_etl
 
 app = Flask(__name__)
 
