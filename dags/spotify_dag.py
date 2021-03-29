@@ -7,7 +7,7 @@ from spotify_etl import run_spotify_etl
 
 
 default_args = {
-    'owner': 'fiegel',
+    'owner': 'admin',
     'start_date': days_ago(1),
     'depends_on_past': True,
     # 'email': [os.environ['DAG_EMAIL']],
