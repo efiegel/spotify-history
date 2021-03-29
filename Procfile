@@ -1,1 +1,1 @@
-web: airflow webserver --port $PORT
+web: airflow users create --username admin --firstname Eric --lastname Fiegel --role Admin --email efiegel01@gmail.com
