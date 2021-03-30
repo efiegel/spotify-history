@@ -9,7 +9,7 @@ from spotify_etl import run_spotify_etl
 default_args = {
     'owner': 'admin',
     'start_date': days_ago(1),
-    'depends_on_past': True,
+    'depends_on_past': False,
     # 'email': [os.environ['DAG_EMAIL']],
     'email_on_failure': True,
     'email_on_retry': False,
