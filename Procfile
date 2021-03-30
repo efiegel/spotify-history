@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: airflow webserver --port $PORT --daemon & airflow scheduler
