@@ -5,6 +5,34 @@ import psycopg2
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import json
+import re 
+import urllib.request 
+from bs4 import BeautifulSoup
+
+def get_lyrics(artist, track):
+    artist = re.sub('[^A-Za-z0-9]+', "", artist.lower()) 
+    track = re.sub('[^A-Za-z0-9]+', "", track.lower())
+
+    if artist.startswith("the"):
+        artist = artist[3:] 
+    
+    url = "http://azlyrics.com/lyrics/" + artist + "/" + track + ".html" 
+     
+    try: 
+        page_content = urllib.request.urlopen(url).read() 
+        lyrics = str(BeautifulSoup(page_content, 'html.parser'))
+
+        # extract lyrics
+        up_partition = '<!-- Usage of azlyrics.com content by any third-party lyrics provider is prohibited by our licensing agreement. Sorry about that. -->' 
+        down_partition = '<!-- MxM banner -->' 
+
+        lyrics = lyrics.split(up_partition)[1] 
+        lyrics = lyrics.split(down_partition)[0] 
+        lyrics = lyrics.replace('<br>','').replace('</br>','').replace('</div>','').strip()
+        
+        return lyrics
+    except Exception as e: 
+        return e
 
 def run_spotify_etl():
     # get 50 latest tracks from the user
