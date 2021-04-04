@@ -29,7 +29,7 @@ def get_lyrics(artist, track):
         lyrics = lyrics.split(up_partition)[1] 
         lyrics = lyrics.split(down_partition)[0] 
         lyrics = lyrics.replace('<br>','').replace('</br>','').replace('</div>','').strip()
-        
+
         return lyrics
     except Exception as e: 
         return e
@@ -92,8 +92,14 @@ def run_spotify_etl():
                            password=os.environ['DB_PASS'], host=os.environ['DB_HOST'])
     cursor = conn.cursor()
 
+    # Only add new entries to the db
+    # i.e. if this 50 is the same as the most recent 50, don't add anything
+    last_50 = engine.execute("SELECT played_at FROM track_history ORDER BY played_at desc LIMIT 50").fetchall()
+    last_50_list = [i[0] for i in last_50]
+    song_df = song_df[~song_df['played_at'].isin(last_50_list)]
+
     try:
-        song_df.to_sql("track_history", engine, schema='public', index=False, if_exists='replace')
+        song_df.to_sql("track_history", engine, schema='public', index=False, if_exists='append')
         conn.commit()
     except Exception as e:
         print(e)
